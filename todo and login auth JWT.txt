@@ -1,0 +1,50 @@
+https://www.youtube.com/watch?v=R1uTPIOuT8s (TODO)
+
+https://cynoteck.com/blog-post/how-to-implement-authentication-in-react-typescript/ (How to implement authe
+ntication in React TypeScript using JWT authentication)
+
+https://www.freecodecamp.org/news/learn-crud-operations-in-javascript-by-building-todo-app/ (TODO crud)
+
+
+
+
+let deletePost = (e) => {};
+
+<i onClick="deletePost(this)" class="fas fa-trash-alt"></i>
+
+let deletePost = (e) => {
+  e.parentElement.parentElement.remove();
+};
+
+
+
+let editPost = (e) => {};
+
+<i onClick="editPost(this)" class="fas fa-edit"></i>
+
+let editPost = (e) => {
+  input.value = e.parentElement.previousElementSibling.innerHTML;
+  e.parentElement.parentElement.remove();
+};
+
+
+REACT-TODO-CRUD
+
+To learn basic concepts of react instead of going in complexity
+
+1. learn CRUD operation
+	//CREATE
+	//READ
+	//UPDATE
+	//DELETE
+
+2. without backend API, data stored in local storage
+
+3. without any UI component library
+
+4. without any state management library
+
+
+
+fetch data
+https://www.youtube.com/shorts/et9QdKUboF4
