@@ -49,7 +49,11 @@ const EmployeeList = (props: Props) => {
                     value="read"
                     onClick={() => viewEmployee(employee)}
                   />
-                  <input type="button" value="update" onClick={() => onEdit(employee)} />
+                  <input
+                    type="button"
+                    value="update"
+                    onClick={() => onEdit(employee)}
+                  />
                   {/* //calling t he callback function onDeleteClickHnd in employeelist */}
                   <input
                     type="button"
@@ -63,8 +67,9 @@ const EmployeeList = (props: Props) => {
         })}
       </table>
       {/* //is use state (showmodal) is true then only show this */}
-      {showModal && dataToShow !== null &&
-      <EmployeeModal onClose={onCloseModal} data={dataToShow} />}
+      {showModal && dataToShow !== null && (
+        <EmployeeModal onClose={onCloseModal} data={dataToShow} />
+      )}
     </div>
   ); //table to write the list in the table format
 };

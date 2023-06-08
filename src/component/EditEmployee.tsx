@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IEmployee } from "./Employee.type";
 import "./EmployeeForm.style.css"
+import axios from "axios";
 
 type Props = {
   data: IEmployee;
@@ -29,7 +30,7 @@ const EditEmployee = (props: Props) => {
     setEmail(e.target.value);
   };
 
-  
+  //UPDATE DATA
   const onSubmitBtnClickHnd = (e: any) => {
     e.preventDefault(); //page refreshes when we add therefore we prevent it from refreshing
     const updatedData: IEmployee = { //chaging the name of data to updated data because it matches the data
@@ -39,6 +40,8 @@ const EditEmployee = (props: Props) => {
       email: email,
     };
     onUpdatedClickHnd(updatedData);
+    console.log(updatedData)
+    axios.put("http://localhost:3001",updatedData)
     onBackBtnClickHnd();  
   };
 

@@ -48,3 +48,11 @@ To learn basic concepts of react instead of going in complexity
 
 fetch data
 https://www.youtube.com/shorts/et9QdKUboF4
+
+
+my sql password reset if forgotten
+
+C:\Program Files\MySQL\MySQL Server 5.7\bin
+
+mysqld --defaults-file="C:\\ProgramData\\MySQL\\MySQL Server 5.7\\my.ini" --init-file=C:\BHAVESH\mysql-init.txt
+

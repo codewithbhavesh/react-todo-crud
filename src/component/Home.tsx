@@ -3,7 +3,9 @@ import EditEmployee from "./EditEmployee";
 import { IEmployee, PageEnum, dummyEmployeeList } from "./Employee.type";
 import EmployeeList from "./EmployeeList";
 import "./Home.style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
+import axios from "axios";
 
 //creating a functional component
 const Home = () => {
@@ -12,6 +14,14 @@ const Home = () => {
   ); //creating 1st state for todo [employeeList:it will hold the list of the employee, 2nd parameter is a function]
   const [shownPage, setShownPage] = useState(PageEnum.list);
   const [dataToEdit, setDataToEdit] = useState({} as IEmployee);
+  
+  
+    useEffect(() => {
+      const listInString = window.localStorage.getItem("EmployeeList")
+      if(listInString){
+        _setEmployeeList(JSON.parse(listInString));
+      }
+    }, []);
 
   const onAddEmployeeClickHnd = () => {
     setShownPage(PageEnum.add);
@@ -21,10 +31,17 @@ const Home = () => {
     setShownPage(PageEnum.list);
   };
 
+  //function to store data in storage
+  const _setEmployeeList = (list: IEmployee[]) => {
+    setEmployeeList(list)
+    window.localStorage.setItem("EmployeeList", JSON.stringify(list))
+  }
+
   const addEmployee = (data: IEmployee) => {
-    setEmployeeList([...employeeList, data]); //first taking the list of employeelist and then appending the data //the way to push the records in the array
+    _setEmployeeList([...employeeList, data]); //first taking the list of employeelist and then appending the data //the way to push the records in the array
   };
 
+  //DELETE EMPLOYEE
   const deleteEmployee = (data: IEmployee) => {
     //to get the index from array i,e employeelist
     //split/splice that
@@ -32,8 +49,10 @@ const Home = () => {
     const indexToDelete = employeeList.indexOf(data);
     const tempList = [...employeeList]
 
-    tempList.splice(indexToDelete, 1); //deletes the record from the list
-    setEmployeeList(tempList) //set employee list passing the new record //update the employee list with the temp list
+    tempList.splice(indexToDelete, 1); //deletes the record from the list SPLICE SYNTAX-(array.splice(index, howmany, item1, ....., itemX))
+    _setEmployeeList(tempList) //set employee list passing the new record //update the employee list with the temp list
+    console.log(tempList);
+    axios.delete(`http://localhost:3001${data}`);
   }
 
   const editEmployeeData = (data: IEmployee) => {
@@ -47,7 +66,7 @@ const Home = () => {
     const indexOfRecord = employeeList.indexOf(filteredData);
     const tempData =[...employeeList] //taking employee list in a temporary variable again to do the deep copy
     tempData[indexOfRecord] = data;//in tempdata we are updating the index of record  with new data
-    setEmployeeList(tempData) //this updates the employee record
+    _setEmployeeList(tempData) //this updates the employee record
   }
 
   return (
@@ -56,6 +75,10 @@ const Home = () => {
         <header>
           <h1>React: CRUD Application</h1>
         </header>
+        {/* <nav className="d-flex">
+          <Link className="btn btn-primary mx-2" to='/login' role="button">Login</Link>
+          <Link className="btn btn-primary mx-2" to='/signup' role="button">Signup</Link>
+        </nav>  */}
       </article>
 
       <section className="section-content">

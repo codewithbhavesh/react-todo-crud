@@ -1,6 +1,7 @@
 import { IEmployee } from "./Employee.type";
 import "./EmployeeForm.style.css";
 import { useState } from "react";
+import axios from "axios";
 
 type Props = {
   onBackBtnClickHnd: () => void;
@@ -21,7 +22,7 @@ const AddEmployee = (props: Props) => {
 
   const onLastNameChangeHnd = (e: any) => {
     //once we start typing it will update the state from the add employee form
-    setLastName(e.target.value);
+     setLastName(e.target.value);
   };
 
   const onEmailChangeHnd = (e: any) => {
@@ -31,12 +32,14 @@ const AddEmployee = (props: Props) => {
   const onSubmitBtnClickHnd = (e: any) => {
     e.preventDefault(); //page refreshes when we add therefore we prevent it from refreshing
     const data: IEmployee = {
-      id: new Date().toJSON().toString(),
+      id: Date.now(),
       firstName: firstName,
       lastName: lastName,
       email: email,
     };
+    console.log(data)
     onSubmitClickHnd(data);
+    axios.post("http://localhost:3001",data) //passing data to backend through Axios
     onBackBtnClickHnd();  
   };
 

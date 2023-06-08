@@ -1,6 +1,6 @@
 //creating a type to declare the interface for the employee, howe and what paramteres it should have 
 export interface IEmployee {
-    id: string;
+    id: string | number;
     firstName: string;
     lastName: string;
     email: string;
